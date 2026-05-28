@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Assinatura - OnTrade</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+        }
+        .form-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 350px;
+        }
+        .form-container h2 {
+            margin-top: 0;
+            font-size: 20px;
+            color: #222;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #FFD100;
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #e6bc00;
+        }
+        .preview-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Crie sua Assinatura</h2>
+        
+        <div class="input-group">
+            <label for="inNome">Nome Completo</label>
+            <input type="text" id="inNome" placeholder="Ex: RODRIGO CAMARGO" oninput="atualizarAssinatura()">
+        </div>
+
+        <div class="input-group">
+            <label for="inCargo">Cargo</label>
+            <input type="text" id="inCargo" placeholder="Ex: Gerente de Operações" oninput="atualizarAssinatura()">
+        </div>
+
+        <div class="input-group">
+            <label for="inTelefone">Telefone / Fixo</label>
+            <input type="text" id="inTelefone" placeholder="Ex: (11) 3871-5555" oninput="atualizarAssinatura()">
+        </div>
+
+        <div class="input-group">
+            <label for="inEmail">E-mail</label>
+            <input type="email" id="inEmail" placeholder="Ex: nome@ontrade.com.br" oninput="atualizarAssinatura()">
+        </div>
+
+        <div class="input-group">
+            <label for="inWhatsApp">WhatsApp (Somente números)</label>
+            <input type="text" id="inWhatsApp" placeholder="Ex: 11999999999" oninput="atualizarAssinatura()">
+        </div>
+
+        <button onclick="copiarAssinatura()">Copiar Assinatura</button>
+        <p style="font-size: 12px; color: #666; text-align: center; margin-top: 10px;">Clique e cole (Ctrl+V) no seu Outlook/Gmail.</p>
+    </div>
+
+    <div class="preview-container">
+        <div id="assinaturaFinal">
+            
+            <table cellpadding="0" cellspacing="0" border="0" width="600" style="font-family: Arial, sans-serif; background-color: #ffffff; color: #333333;">
+                <tr>
+                    <td style="padding-bottom: 25px; padding-top: 10px;">
+                        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                            <tr>
+                                <td width="220" valign="middle" align="center" style="padding-right: 20px;">
+                                    <img src="logo1.png" alt="Logo" width="180" style="display: block; border: none;">
+                                </td>
+                                <td width="380" valign="top">
+                                    <h1 id="outNome" style="margin: 0; font-size: 16px; color: #222222; font-weight: bold;">NOME SOBRENOME</h1>
+                                    <p id="outCargo" style="margin: 4px 0 20px 0; font-size: 12px; color: #555555;">SEU CARGO</p>
+
+                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                        <tr>
+                                            <td width="28" valign="middle" style="padding-bottom: 12px;">
+                                                <img src="https://img.icons8.com/ios-filled/50/FFD100/user.png" width="16" style="display: block;">
+                                            </td>
+                                            <td id="outTelefone" valign="middle" style="padding-bottom: 12px; font-size: 12px; color: #111111;">
+                                                (00) 0000-0000
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="28" valign="middle" style="padding-bottom: 12px;">
+                                                <img src="https://img.icons8.com/ios-filled/50/FFD100/new-post.png" width="16" style="display: block;">
+                                            </td>
+                                            <td valign="middle" style="padding-bottom: 12px; font-size: 12px;">
+                                                <a id="outEmail" href="mailto:email@ontrade.com.br" style="color: #0055cc; text-decoration: underline;">email@ontrade.com.br</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="28" valign="top">
+                                                <img src="https://img.icons8.com/ios-filled/50/FFD100/marker.png" width="16" style="display: block; margin-top: 2px;">
+                                            </td>
+                                            <td valign="top" style="font-size: 12px; color: #111111; line-height: 1.5;">
+                                                R. Alm Pereira Guimarães, 327<br>
+                                                Pacaembu, São Paulo - SP
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td bgcolor="#FFD100" style="background-color: #FFD100; padding: 12px 20px;">
+                        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                            <tr>
+                                <td valign="middle" align="left">
+                                    <table cellpadding="0" cellspacing="0" border="0">
+                                        <tr>
+                                            <td style="padding-right: 12px; vertical-align: middle;">
+                                                <a id="outWhatsAppLink" href="https://wa.me/" target="_blank">
+                                                    <img src="whatsapp.png" alt="WhatsApp" width="24" style="display: block; border: none;">
+                                                </a>
+                                            </td>
+                                            <td style="padding-right: 12px; vertical-align: middle;">
+                                                <a href="https://br.linkedin.com/company/agencia-ontrade" target="_blank">
+                                                    <img src="linkedin.png" alt="LinkedIn" width="24" style="display: block; border: none;">
+                                                </a>
+                                            </td>
+                                            <td style="vertical-align: middle;">
+                                                <a href="https://www.instagram.com/ontrade.oficial/" target="_blank">
+                                                    <img src="instagram.png" alt="Instagram" width="24" style="display: block; border: none;">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td valign="middle" align="right">
+                                    <a href="http://www.ontradebr.com.br" style="color: #000000; text-decoration: underline; font-weight: bold; font-size: 13px;">www.ontradebr.com.br</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-top: 20px;">
+                        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                            <tr>
+                                <td valign="middle" style="font-size: 11px; color: #555555; line-height: 1.7; text-align: left; padding-right: 15px; font-weight: bold;">
+                                    Este e-mail e quaisquer arquivos transmitidos com ele são<br>
+                                    considerados confidenciais e destinados exclusivamente para<br>
+                                    uso pelo indivíduo ou entidade a quem são endereçados.
+                                </td>
+                                <td width="120" valign="middle" align="right">
+                                    <img src="logo2.png" alt="Logo Grupo" width="100" style="display: block; border: none;">
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            </div>
+    </div>
+
+    <script>
+        function atualizarAssinatura() {
+            // Pega os valores e FORÇA O TEXTO A SER MAIÚSCULO/MINÚSCULO DIRETAMENTE NO JAVASCRIPT
+            const nome = (document.getElementById('inNome').value || "NOME SOBRENOME").toUpperCase();
+            const cargo = (document.getElementById('inCargo').value || "SEU CARGO").toUpperCase();
+            
+            // O email forçamos a ficar sempre minúsculo
+            const email = (document.getElementById('inEmail').value || "email@ontrade.com.br").toLowerCase();
+            
+            const telefone = document.getElementById('inTelefone').value || "(00) 0000-0000";
+            const wpp = document.getElementById('inWhatsApp').value || "";
+
+            // Injeta o texto no HTML já convertido, eliminando a dependência do CSS no Outlook
+            document.getElementById('outNome').innerText = nome;
+            document.getElementById('outCargo').innerText = cargo;
+            document.getElementById('outTelefone').innerText = telefone;
+            
+            const elEmail = document.getElementById('outEmail');
+            elEmail.innerText = email;
+            elEmail.href = "mailto:" + email;
+
+            document.getElementById('outWhatsAppLink').href = "https://wa.me/+55" + wpp;
+        }
+
+        function copiarAssinatura() {
+            const container = document.getElementById("assinaturaFinal");
+            const range = document.createRange();
+            range.selectNode(container);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            
+            try {
+                document.execCommand('copy');
+                alert('Pronto! Assinatura copiada com sucesso.\nAgora é só abrir seu e-mail e colar (Ctrl+V).');
+            } catch (err) {
+                alert('Erro ao copiar. Selecione a imagem da direita manualmente e aperte Ctrl+C.');
+            }
+            
+            window.getSelection().removeAllRanges();
+        }
+    </script>
+</body>
+</html>
